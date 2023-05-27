@@ -17,12 +17,29 @@
       <label>Accept terms and conditions</label>
     </div>
 
+    <div class="non-required-checkboxes">
+      <div>
+        <input type="checkbox" value="shaun" v-model="player_names">
+        <label>Shaun</label>
+      </div>
+      <div>
+        <input type="checkbox" value="yoshi" v-model="player_names">
+        <label>Yoshi</label>
+      </div> 
+      <div>
+        <input type="checkbox" value="mario" v-model="player_names">
+        <label>Sabra</label>
+      </div> 
+    </div>
+
   </form>
 
   <p>Email: {{ email_input }}</p>
   <p>Password: {{ password_input }}</p>
   <p>Role: {{ role_selection }}</p>
   <p>Terms accepted: {{ terms_acception }}</p>
+  <p>Players: {{ player_names }}</p>
+
 
 </template>
 
@@ -33,7 +50,8 @@ export default {
       email_input: '',
       password_input: '',
       role_selection: '',
-      terms_acception: false
+      terms_acception: false,
+      player_names: []
     }
   }
 
