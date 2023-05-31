@@ -14,7 +14,7 @@
 
     <label>Skills:</label>
     <input type="text" v-model="focus_skill" @keyup="addSkill">
-    <div v-for="skill in skills" v-bind:key="skill" class="pill">
+    <div v-for="skill in skills" v-bind:key="skill" class="pill" @click="removeSkill">
       {{ skill }}
     </div>
 
@@ -52,6 +52,9 @@ export default {
         }
         this.focus_skill = ''
       }
+    },
+    removeSkill( e ) {
+      console.log( e )
     }
   }
 
