@@ -12,6 +12,12 @@
       <option value="designer">Web designer</option>
     </select>
 
+    <label>Skills:</label>
+    <input type="text" v-model="focus_skill" @keyup="addSkill">
+    <div v-for="skill in skills" v-bind:key="skill" class="pill">
+      {{ skill }}
+    </div>
+
     <div class="terms">
       <input type="checkbox" v-model="terms_acception" required>
       <label>Accept terms and conditions</label>
@@ -22,6 +28,7 @@
   <p>Email: {{ email_input }}</p>
   <p>Password: {{ password_input }}</p>
   <p>Role: {{ role_selection }}</p>
+  <p>Skills: {{ skills }}</p>
   <p>Terms accepted: {{ terms_acception }}</p>
 
 </template>
@@ -33,7 +40,19 @@ export default {
       email_input: '',
       password_input: '',
       role_selection: '',
-      terms_acception: false
+      terms_acception: false,
+      focus_skill: '',
+      skills: []
+    }
+  },
+  methods: {
+    addSkill( e ) {
+      if( e.key === ',' || e.key === 'Enter' && this.focus_skill ) {
+        if( !this.skills.includes( this.focus_skill )) {
+          this.skills.push( this.focus_skill )
+        }
+        this.focus_skill = ''
+      }
     }
   }
 
