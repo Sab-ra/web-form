@@ -1,10 +1,11 @@
 <template>
-  <form>
+  <form @submit.prevent="handleSubmit">
     <label>Email:</label>
     <input type="email" required v-model="email_input" />
 
     <label>Password:</label>
     <input type="password" required v-model="password_input" />
+    <div v-if="password_error" class="error">{{ password_error }}</div>
 
     <label>Role:</label>
     <select required v-model="role_selection">
@@ -23,6 +24,10 @@
       <label>Accept terms and conditions</label>
     </div>
 
+    <div class="submit">
+      <button>Create an Account</button>
+    </div>
+
   </form>
 
   <p>Email: {{ email_input }}</p>
@@ -38,10 +43,11 @@ export default {
     return {
       email_input: '',
       password_input: '',
-      role_selection: '',
-      terms_acception: false,
+      role_selection: 'developer',
+      terms_acception: true,
       focus_skill: '',
-      skills: []
+      skills: [],
+      password_error: ''
     }
   },
   methods: {
@@ -57,6 +63,20 @@ export default {
       this.skills = this.skills.filter( ( item ) => {
         return skill !== item
       })
+    },
+    handleSubmit() {
+      // validate password
+      this.password_error = this.password_input.length > 5 ?
+        '' : 'Password must be at least 6 characters long'
+      
+      // output the information
+      if( !this.password_error ) {
+        console.log( 'email:', this.email_input )
+        console.log( 'password:', this.password_input )
+        console.log( 'role:', this.role_selection )
+        console.log( 'skills:', this.skills )
+        console.log( 'terms accepted:', this.terms_acception )
+      }
     }
   }
 
@@ -108,5 +128,22 @@ export default {
     font-weight: bold;
     color: #777;
     cursor: pointer;
+  }
+  button {
+    background: #0b6dff;
+    border: 0;
+    padding: 10px 20px;
+    margin-top: 20px;
+    color: white;
+    border-radius: 20px;
+  }
+  .submit {
+    text-align: center;
+  }
+  .error {
+    color: #ff0062;
+    margin-top: 10px;
+    font-size: 0.8em;
+    font-weight: bold;
   }
 </style>
